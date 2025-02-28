@@ -14,12 +14,12 @@ with open('assets/style.css') as f:
 
 def main():
     st.markdown("<h1 class='main-header'>OnkoNixAI</h1>", unsafe_allow_html=True)
-    st.markdown("### Akciğer Kanseri Teşhis ve Tedavi Platformu")
+    st.markdown("<p class='section-header'>Akciğer Kanseri Teşhis ve Tedavi Platformu</p>", unsafe_allow_html=True)
 
     # Sidebar
-    st.sidebar.title("Navigasyon")
+    st.sidebar.markdown("<h2 class='section-header'>Navigasyon</h2>", unsafe_allow_html=True)
     page = st.sidebar.radio(
-        "Sayfa Seçin:",
+        "",  # Label boş bırakılarak sadece seçenekler gösterilir
         ["Ana Sayfa", "Hasta Bilgileri", "Görüntü Analizi", "Doz Hesaplama"]
     )
 
@@ -33,8 +33,9 @@ def main():
         show_dose_calculator()
 
 def show_dashboard():
+    # Metrik kartları için üç kolon oluştur
     col1, col2, col3 = st.columns(3)
-    
+
     with col1:
         st.markdown("""
         <div class='metric-card'>
@@ -42,7 +43,7 @@ def show_dashboard():
             <h2>127</h2>
         </div>
         """, unsafe_allow_html=True)
-    
+
     with col2:
         st.markdown("""
         <div class='metric-card'>
@@ -50,7 +51,7 @@ def show_dashboard():
             <h2>24</h2>
         </div>
         """, unsafe_allow_html=True)
-    
+
     with col3:
         st.markdown("""
         <div class='metric-card'>
@@ -58,6 +59,8 @@ def show_dashboard():
             <h2>94%</h2>
         </div>
         """, unsafe_allow_html=True)
+
+    st.markdown("<h2 class='section-header'>Analiz Metrikleri</h2>", unsafe_allow_html=True)
 
     # Demo hasta verileri
     sample_data = {
@@ -67,17 +70,33 @@ def show_dashboard():
     }
     df = pd.DataFrame(sample_data)
 
-    # Hasta sayısı grafiği
-    fig1 = px.line(df, x='Tarih', y='Hasta_Sayisi',
-                   title='Günlük Hasta Analizi',
-                   template='plotly_white')
-    st.plotly_chart(fig1, use_container_width=True)
+    col1, col2 = st.columns(2)
 
-    # Başarı oranı grafiği
-    fig2 = px.line(df, x='Tarih', y='Basari_Orani',
-                   title='Teşhis Başarı Oranı Trendi',
-                   template='plotly_white')
-    st.plotly_chart(fig2, use_container_width=True)
+    with col1:
+        # Hasta sayısı grafiği
+        fig1 = px.line(df, x='Tarih', y='Hasta_Sayisi',
+                    title='Günlük Hasta Analizi',
+                    template='plotly_white')
+        fig1.update_traces(line_color='#3498db')
+        st.plotly_chart(fig1, use_container_width=True)
+
+    with col2:
+        # Başarı oranı grafiği
+        fig2 = px.line(df, x='Tarih', y='Basari_Orani',
+                    title='Teşhis Başarı Oranı Trendi',
+                    template='plotly_white')
+        fig2.update_traces(line_color='#27ae60')
+        st.plotly_chart(fig2, use_container_width=True)
+
+    # Özet bilgi kutusu
+    st.markdown("""
+    <div class='info-box'>
+        <h4>Sistem Performans Özeti</h4>
+        <p>• Son 30 günde %94 doğruluk oranı</p>
+        <p>• Ortalama analiz süresi: 15 dakika</p>
+        <p>• Aktif hasta takip sayısı: 127</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 def show_patient_info():
     st.markdown("## Hasta Bilgileri")

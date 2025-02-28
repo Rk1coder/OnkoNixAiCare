@@ -1,32 +1,162 @@
+/* Ana stil tanımlamaları */
 .stApp {
     font-family: 'Inter', sans-serif;
+    background-color: #f8f9fa;
 }
 
+/* Başlık stilleri */
 .main-header {
-    color: #0066cc;
-    font-weight: 600;
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #3498db;
 }
 
+.section-header {
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 1.5rem 0;
+}
+
+/* Metrik kartları */
 .metric-card {
     background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    border-left: 4px solid #3498db;
 }
 
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+.metric-card h3 {
+    color: #7f8c8d;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.metric-card h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin: 0;
+}
+
+/* Durum metinleri */
 .warning-text {
-    color: #ff4b4b;
+    color: #e74c3c;
     font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    background-color: rgba(231, 76, 60, 0.1);
 }
 
 .success-text {
-    color: #00cc66;
+    color: #27ae60;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+/* Bilgi kutuları */
+.info-box {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 1rem 0;
+    border-left: 4px solid #3498db;
+}
+
+.info-box h4 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.info-box p {
+    color: #7f8c8d;
+    margin: 0.5rem 0;
+}
+
+/* Tablo stilleri */
+.dataframe {
+    border: none !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 0.5rem;
+}
+
+.dataframe th {
+    background-color: #f8f9fa !important;
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+}
+
+.dataframe td {
+    padding: 1rem !important;
+    color: #7f8c8d !important;
+}
+
+/* Sekme stilleri */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 1rem;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.stTabs [data-baseweb="tab"] {
+    padding: 1rem 2rem;
+    color: #7f8c8d;
     font-weight: 500;
 }
 
-.info-box {
-    background-color: #f8f9fa;
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+}
+
+/* Form elemanları */
+.stSelectbox, .stTextInput {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    border: 1px solid #e0e0e0;
+    padding: 0.5rem;
+}
+
+/* Analiz sonuçları */
+.analysis-result {
     padding: 1rem;
-    border-left: 4px solid #0066cc;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    margin: 0.5rem 0;
+    border-left: 4px solid #3498db;
+}
+
+.risk-score {
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
     margin: 1rem 0;
+}
+
+.risk-low {
+    color: #27ae60;
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+.risk-medium {
+    color: #f39c12;
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+.risk-high {
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
 }
