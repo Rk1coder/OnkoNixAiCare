@@ -37,7 +37,7 @@ def main():
         st.markdown("<h2 class='section-header'>Navigasyon</h2>", unsafe_allow_html=True)
         page = st.radio(
             "",
-            ["Ana Sayfa", "Hasta Bilgileri", "Görüntü Analizi", "Doz Hesaplama"]
+            ["Ana Sayfa", "Hasta Bilgileri", "Görüntü Analizi", "Rapor Analizi", "Doz Hesaplama"]
         )
 
     if page == "Ana Sayfa":
@@ -46,6 +46,8 @@ def main():
         show_patient_info()
     elif page == "Görüntü Analizi":
         show_image_analysis()
+    elif page == "Rapor Analizi":
+        show_report_analysis()
     elif page == "Doz Hesaplama":
         show_dose_calculator()
 
@@ -139,6 +141,12 @@ def show_image_analysis():
             <p>Güven Skoru: 87%</p>
         </div>
         """, unsafe_allow_html=True)
+
+def show_report_analysis():
+    st.markdown("## Hasta Rapor Analizi")
+    # Add your report analysis code here.  This is a placeholder.
+    st.write("Bu bölümde hasta rapor analizleri yer alacaktır.")
+
 
 def show_dose_calculator():
     st.markdown("## Tedavi Doz Hesaplama")
