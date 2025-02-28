@@ -3,11 +3,10 @@ import pandas as pd
 from datetime import datetime
 from utils.data_analysis import analyze_blood_values, analyze_pathology_report
 
-def show_patient_details(patient_id):
-    """
-    Hasta detaylarını gösterir
-    """
-    patient_data = {
+# Demo veriler için cache
+@st.cache_data
+def get_patient_data(patient_id):
+    return {
         'Hasta ID': patient_id,
         'Ad Soyad': 'Ahmet Yılmaz',
         'Doğum Tarihi': '1969-05-15',
@@ -15,18 +14,9 @@ def show_patient_details(patient_id):
         'Tedavi Başlangıç': '2024-01-15'
     }
 
-    st.markdown("### Hasta Detayları")
-    for key, value in patient_data.items():
-        st.text(f"{key}: {value}")
-
-def show_blood_tests():
-    """
-    Kan testi sonuçlarını gösterir ve analiz eder
-    """
-    st.markdown("### Kan Testi Sonuçları")
-
-    # Demo kan testi verileri
-    blood_tests = {
+@st.cache_data
+def get_blood_test_data():
+    return {
         'WBC': 6.8,    # Beyaz kan hücresi
         'RBC': 4.9,    # Kırmızı kan hücresi
         'HGB': 14.8,   # Hemoglobin
@@ -38,10 +28,36 @@ def show_blood_tests():
         'ALP': 130     # Alkalen fosfataz
     }
 
-    # Sonuçları analiz et
+@st.cache_data
+def get_pathology_data():
+    return {
+        'histology': 'Adenokarsinom',
+        'stage': 'Stage II',
+        'differentiation': 'Orta derecede diferansiye'
+    }
+
+@st.cache_data
+def get_treatment_history():
+    return pd.DataFrame({
+        'Tarih': ['2024-01-15', '2024-01-30', '2024-02-15'],
+        'İşlem': ['Kemoterapi', 'Kontrol', 'Kemoterapi'],
+        'Notlar': ['İlk seans', 'Yan etki yok', 'İkinci seans'],
+        'Kan Değerleri': ['Normal', 'WBC düşük', 'Normal'],
+        'Doz Ayarlaması': ['Standart', 'Doz azaltma', 'Standart']
+    })
+
+def show_patient_details(patient_id):
+    patient_data = get_patient_data(patient_id)
+
+    st.markdown("### Hasta Detayları")
+    for key, value in patient_data.items():
+        st.text(f"{key}: {value}")
+
+def show_blood_tests():
+    st.markdown("### Kan Testi Sonuçları")
+    blood_tests = get_blood_test_data()
     analysis = analyze_blood_values(blood_tests)
 
-    # Sonuçları görüntüle
     col1, col2 = st.columns(2)
 
     with col1:
@@ -66,13 +82,7 @@ def show_blood_tests():
         st.markdown("#### Risk Değerlendirmesi")
         risk_score = analysis['risk_score']
 
-        # Risk skoruna göre renk belirleme
-        if risk_score < 3:
-            risk_color = 'success-text'
-        elif risk_score < 7:
-            risk_color = 'warning-text'
-        else:
-            risk_color = 'error-text'
+        risk_color = 'success-text' if risk_score < 3 else 'warning-text' if risk_score < 7 else 'error-text'
 
         st.markdown(f"""
         <div class='info-box'>
@@ -82,18 +92,8 @@ def show_blood_tests():
         """, unsafe_allow_html=True)
 
 def show_pathology_results():
-    """
-    Patoloji sonuçlarını gösterir
-    """
     st.markdown("### Patoloji Sonuçları")
-
-    # Demo patoloji verileri
-    pathology_data = {
-        'histology': 'Adenokarsinom',
-        'stage': 'Stage II',
-        'differentiation': 'Orta derecede diferansiye'
-    }
-
+    pathology_data = get_pathology_data()
     analysis = analyze_pathology_report(pathology_data)
 
     st.markdown(f"""
@@ -107,19 +107,8 @@ def show_pathology_results():
     """, unsafe_allow_html=True)
 
 def show_treatment_history():
-    """
-    Tedavi geçmişini gösterir
-    """
     st.markdown("### Tedavi Geçmişi")
-
-    treatments = pd.DataFrame({
-        'Tarih': ['2024-01-15', '2024-01-30', '2024-02-15'],
-        'İşlem': ['Kemoterapi', 'Kontrol', 'Kemoterapi'],
-        'Notlar': ['İlk seans', 'Yan etki yok', 'İkinci seans'],
-        'Kan Değerleri': ['Normal', 'WBC düşük', 'Normal'],
-        'Doz Ayarlaması': ['Standart', 'Doz azaltma', 'Standart']
-    })
-
+    treatments = get_treatment_history()
     st.dataframe(treatments, use_container_width=True)
 
 def main():
