@@ -11,4 +11,5 @@ dependencies = [
     "scikit-learn>=1.6.1",
     "spacy>=3.8.4",
     "streamlit>=1.42.2",
+    "trafilatura>=2.0.0",
 ]
