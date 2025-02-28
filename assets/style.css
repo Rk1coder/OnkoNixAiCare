@@ -1,0 +1,32 @@
+.stApp {
+    font-family: 'Inter', sans-serif;
+}
+
+.main-header {
+    color: #0066cc;
+    font-weight: 600;
+}
+
+.metric-card {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+}
+
+.warning-text {
+    color: #ff4b4b;
+    font-weight: 500;
+}
+
+.success-text {
+    color: #00cc66;
+    font-weight: 500;
+}
+
+.info-box {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-left: 4px solid #0066cc;
+    margin: 1rem 0;
+}
